@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FA5NUMBER2</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Teachers:ital,wght@0,400..800;1,400..800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Teachers:ital,wght@0,400..800;1,400..800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Teachers:ital,wght@0,400..800;1,400..800&display=swap');
+
+        .phone {
+            font-family: 'Poppins', serif;
+            width: 350px;
+            height: 600px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+        }
+        p1 {
+            font-size: 13px;
+        }
+
+
+        .screen {
+            background-color: #fff;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        .contacts {
+            margin: 20px 0;
+            padding: 0;
+            list-style: none;
+        }
+        .contacts li {
+            padding: 5px 0;
+        }
+        input[type="text"] {
+            font-family: 'Teachers', serif;
+            width: 150px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        .add-button {
+            font-family: 'DM Sans', serif;
+            padding: 5px;
+            padding-left: 7px;
+            padding-right: 7px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .remove-button {
+            font-family: 'DM Sans', serif;  
+            padding: 5px;
+            padding-left: 7px;
+            padding-right: 7px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        .add-button:hover {
+            background-color: #16f621;
+            color: #333;
+        }
+
+        .remove-button:hover {
+            background-color: #8c0200;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone">
+        <div class="screen">
+            <div class="container">
+                <h1>My Iphone</h1>
+                <p>Add contacts</p>
+                <p1>Limit: 7 contacts max <br></br></p1>
+                <input type="text" id="contactName" placeholder="Enter contact name">
+                <button class="add-button" onclick="addContact()">Add</button>
+                <button class="remove-button" onclick="removeContact()">Remove</button>
+                <ul id="contactsList" class="contacts"></ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        let contacts = [];
+
+        function addContact() {
+            const contactName = document.getElementById('contactName').value;
+            if (contactName.trim() !== "") {
+                if (contacts.length === 7) {
+                    contacts.shift(); 
+                }
+                contacts.push(contactName);
+                document.getElementById('contactName').value = ''; 
+                updateContactsList();
+            } else {
+                alert('You have mistakenly entered nothing. Add a someone new!');
+            }
+        }
+
+        function removeContact() {
+            if (contacts.length > 0) {
+                contacts.pop();
+                updateContactsList();
+            } else {
+                alert('The contact list is empty. Add someone new!');
+            }
+        }
+
+        function updateContactsList() {
+            const contactsList = document.getElementById('contactsList');
+            contactsList.innerHTML = '';
+            contacts.forEach(contact => {
+                const li = document.createElement('li');
+                li.textContent = contact;
+                contactsList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
